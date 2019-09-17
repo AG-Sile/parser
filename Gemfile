@@ -7,4 +7,8 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem 'nokogiri', '1.10.4'
 gem 'grape', '1.2.4'
 
-# gem "rails"
+group :test do 
+  gem 'rspec', '3.8.0'
+  gem 'rack-test'
+  gem 'webmock'
+end
