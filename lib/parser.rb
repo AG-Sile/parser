@@ -4,6 +4,8 @@ require 'open-uri'
 class Parser
 
   def parse_reviews(url)
+    
+    raise ArgumentError.new("lender_url was not provided") if url.nil?
     site = Nokogiri::HTML(open(url))
     # grab total review count
     reviews_count = site.css('a[class=reviews-count]').children.text.split(" ").first.to_i
