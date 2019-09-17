@@ -1,4 +1,4 @@
 require File.expand_path('../application', __FILE__)
 
 run API::Root
-run ReviewParser::API
+run API::ReviewParser

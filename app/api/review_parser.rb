@@ -1,7 +1,7 @@
 require './lib/parser'
 
-module ReviewParser
-  class API < Grape::API
+module API
+  class ReviewParser < Grape::API
     version 'v1', using: :header, vendor: 'me'
     format :json
     prefix :api
