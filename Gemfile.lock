@@ -85,5 +85,8 @@ DEPENDENCIES
   rspec (= 3.8.0)
   webmock
 
+RUBY VERSION
+   ruby 2.6.4p104
+
 BUNDLED WITH
    1.17.2

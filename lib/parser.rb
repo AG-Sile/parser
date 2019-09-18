@@ -10,9 +10,9 @@ class Parser
     raise ArgumentError.new("lender_url was not provided") if url.nil?
     site = Nokogiri::HTML(open(url))
     # grab total review count
-    reviews_count = site.css('a[class=reviews-count]').children.text.split(" ").first.to_i
     brand_id = site.css('a.reviewBtn.write-review').at('a').get_attribute('data-lenderreviewid')
-    get_review_threads(reviews_count, brand_id).map(&:value).flatten
+    review_threads = get_review_threads(brand_id)
+    review_threads.map(&:value).flatten.uniq
   end
 
   private
@@ -33,8 +33,11 @@ class Parser
       }
   end 
 
-  def get_review_threads(reviews_count, lender_reviews_id)
+  def get_review_threads(lender_reviews_id)
     base_url = "https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=#{lender_reviews_id}&requestmode=reviews,stats,ratingconfig,propertyconfig&sortby=reviewsubmitted&sortorder=desc&pagesize=100"
+    base_uri_for_count = base_url + "&page=0"
+    response = Net::HTTP.get_response(URI.parse(base_uri_for_count))
+    reviews_count = JSON.parse(response.body)['filteredCount'].to_i
     review_threads = (0..(reviews_count/100.0).floor).map do |pg_n|
       Thread.new do
         retry_count = 5

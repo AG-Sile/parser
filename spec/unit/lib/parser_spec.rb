@@ -100,19 +100,6 @@ describe Parser do
         :overall_rating=>"5", 
         :secondary_rating=>{}, 
         :review_dateTime=>dateTimeNow.to_s
-      },
-      {
-        :title=>"The REVIEW", 
-        :review_text=>"Just look at how awesome my review is!!", 
-        :author_name=>"Mr Kittens", 
-        :author_email=>"kittens@example.com", 
-        :author_location=>"Dark Alley, IL", 
-        :is_recommended=>"true", 
-        :review_likes=>"9001", 
-        :review_dislikes=>"0", 
-        :overall_rating=>"5", 
-        :secondary_rating=>{}, 
-        :review_dateTime=>dateTimeNow.to_s
       }])
 
     end
